@@ -3,12 +3,15 @@ import { TextField, Typography, Box } from '@mui/material';
 import { login as apiLogin } from '../services/api';
 import { StyledPaper, StyledButton } from '../styles/styledComponents';
 import { useAuth } from '../contexts/AuthContext';
+import { useNavigate } from "react-router-dom";
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const { login } = useAuth();
+  const navigate = useNavigate();
+
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -16,6 +19,7 @@ const Login: React.FC = () => {
       const data = await apiLogin(email, password);
       console.log('Login response:', data); // Add this line
       login(data.token);
+      navigate('/dashboard');
     } catch (err) {
       setError('Invalid email or password');
     }
