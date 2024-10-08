@@ -123,6 +123,7 @@ const Employees: React.FC = () => {
             variant="contained"
             startIcon={<AddIcon />}
             onClick={handleOpen}
+            sx={{ backgroundColor: '#00BCD4', color: 'white', '&:hover': { backgroundColor: '#00a0b2' } }}
           >
             New Employee
           </StyledButton>

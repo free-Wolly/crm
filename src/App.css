@@ -49,3 +49,18 @@ main {
     transform: rotate(360deg);
   }
 }
+
+.sidebar-item {
+  text-decoration: none;
+  color: black;
+  transition: background-color 0.3s;
+}
+
+.sidebar-item:hover {
+  background-color: #e6e6e6;
+  color: white;
+}
+
+.active {
+  background-color: #7FD3E6;
+}

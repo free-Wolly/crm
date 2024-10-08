@@ -38,7 +38,11 @@ const Products: React.FC = () => {
     <div>
       <Typography variant="h4">Products</Typography>
       <PermissionGate allowedRoles={['ADMIN']}>
-        <Button variant="contained" color="primary" onClick={handleOpen}>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={handleOpen}
+          sx={{ backgroundColor: '#00BCD4', color: 'white', marginTop: '20px', '&:hover': { backgroundColor: '#00a0b2' } }}>
           Add Product
         </Button>
       </PermissionGate>

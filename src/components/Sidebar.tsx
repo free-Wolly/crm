@@ -1,14 +1,15 @@
 import React from 'react';
-import { Drawer, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
+import { Box, Drawer, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
 import { Link } from 'react-router-dom';
-import DashboardIcon from '@mui/icons-material/Dashboard';
-import PeopleIcon from '@mui/icons-material/People';
-import WorkIcon from '@mui/icons-material/Work';
-import InventoryIcon from '@mui/icons-material/Inventory';
+import { sidebarMenu } from '../constants/SidebarMenu';
+import { useLocation } from 'react-router-dom'
 
 const drawerWidth = 240;
 
 const Sidebar: React.FC = () => {
+  const location = useLocation();
+  const { pathname } = location;
+
   return (
     <Drawer
       variant="permanent"
@@ -21,31 +22,28 @@ const Sidebar: React.FC = () => {
         },
       }}
     >
+
+      <Link to={'/'} style={{ textDecoration: 'none', color: 'black' }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', padding: '0px 16px', gap: '12px' }}>
+          <img src="/img/logo.png" width={65} height={45} alt="Wolly" />
+          <h2>Wolly</h2>
+        </Box>
+      </Link>
       <List>
-        <ListItem component={Link} to="/dashboard">
-          <ListItemIcon>
-            <DashboardIcon />
-          </ListItemIcon>
-          <ListItemText primary="Dashboard" />
-        </ListItem>
-        <ListItem component={Link} to="/users">
-          <ListItemIcon>
-            <PeopleIcon />
-          </ListItemIcon>
-          <ListItemText primary="Users" />
-        </ListItem>
-        <ListItem component={Link} to="/employees">
-          <ListItemIcon>
-            <WorkIcon />
-          </ListItemIcon>
-          <ListItemText primary="Employees" />
-        </ListItem>
-        <ListItem component={Link} to="/products">
-          <ListItemIcon>
-            <InventoryIcon />
-          </ListItemIcon>
-          <ListItemText primary="Products" />
-        </ListItem>
+
+        {sidebarMenu.map((item, index) => (
+          <ListItem
+            component={Link}
+            to={item.link}
+            key={index}
+            className={`sidebar-item ${pathname === item.link ? 'active' : ''}`}
+          >
+            <ListItemIcon>
+              {item.icon}
+            </ListItemIcon>
+            <ListItemText primary={item.title} sx={{ color: 'black' }} />
+          </ListItem>
+        ))}
       </List>
     </Drawer>
   );
